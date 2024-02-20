@@ -1,4 +1,4 @@
-# DSCapstoneProject - UniBuddy
+# UniBuddy 
 
 In the modern age, universities facing lot of challenges in effectively engaging with their students and providing timely support.
 As technology continues to advance, there emerges an opportunity to revolutionize the way universities interact with their student body: the creation of UniBuddy.
