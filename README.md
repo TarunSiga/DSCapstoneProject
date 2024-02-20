@@ -1,3 +1,7 @@
 # DSCapstoneProject - UniBuddy
 
-The traditional university website, brimming with static pages and dense FAQs, often fails to deliver the dynamic, personalized experience desired by prospective and current students. Enter the chatbot: a virtual assistant capable of revolutionizing how universities engage and inform their student body. Imagine students effortlessly navigating through complex course availability and fee structures, receiving instant updates on ongoing research projects, and discovering vibrant extracurricular activities - all within a single, conversational interface. Chatbots bridge the gap between information overload and accessible knowledge, enhancing engagement and streamlining student life. With instant responses, 24/7 availability, and the ability to cater to diverse learning styles, chatbots offer a potent solution for universities seeking to foster a dynamic, informed, and connected student community.
+In the modern age, universities facing lot of challenges in effectively engaging with their students and providing timely support.
+As technology continues to advance, there emerges an opportunity to revolutionize the way universities interact with their student body: the creation of UniBuddy.
+This UniBuddy offers strategic response to pressing need, serves as a communication channel to enhnce student experience by leveraging artificial and natural language processing capabilities. 
+This UniBuddy offers students personalized and efficient means to access information, seek assistance, and navigate campus resources. 
+
