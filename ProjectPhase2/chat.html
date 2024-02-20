@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+           
+            height: 100%;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .main {
+            flex: 2;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .message-container {
+            margin-bottom: 20px;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: calc(100% - 20px);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #3aa160;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #2e7d5e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Old Chats</h2>
+            <div class="message-container" id="oldChats">
+                <!-- Old chats will be displayed here -->
+                <div class="message"></div>
+               
+                <!-- Add more old chats as needed -->
+            </div>
+        </div>
+        <div class="main">
+            <h1>Welcome to the Chat</h1>
+            <div class="message-container" id="messageContainer">
+                <!-- Messages will be displayed here -->
+            </div>
+            <input type="text" id="messageInput" placeholder="Type your message...">
+            <button onclick="sendMessage()" class="btn">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            var messageInput = document.getElementById('messageInput');
+            var message = messageInput.value.trim();
+            if (message !== '') {
+                var messageContainer = document.getElementById('messageContainer');
+                var messageElement = document.createElement('div');
+                messageElement.textContent = message;
+                messageElement.classList.add('message', 'question');
+                messageContainer.appendChild(messageElement);
+
+                // Simulate bot response based on the question
+                var botResponse = document.createElement('div');
+                botResponse.textContent = getBotResponse(message);
+                botResponse.classList.add('message', 'answer');
+                messageContainer.appendChild(botResponse);
+
+                // Move the question and answer to the "Old Chats" section
+                var oldChatsContainer = document.getElementById('oldChats');
+                oldChatsContainer.appendChild(messageElement.cloneNode(true));
+                oldChatsContainer.appendChild(botResponse.cloneNode(true));
+
+                // For now, let's clear the input field
+                messageInput.value = '';
+
+                // Scroll to bottom to show the latest message
+                messageContainer.scrollTop = messageContainer.scrollHeight;
+            }
+        }
+
+        function getBotResponse(question) {
+            // Simple logic to determine bot response based on question
+            if (question.toLowerCase().includes('how are you')) {
+                return "I'm doing well, thank you!";
+            } else if (question.toLowerCase().includes('weather')) {
+                return "The weather is sunny today.";
+            } else {
+                return "I'm sorry, I don't understand.";
+            }
+        }
+    </script>
+    
+</body>
+</html>
