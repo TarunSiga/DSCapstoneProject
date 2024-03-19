@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        input[type="email"], input[type="password"] {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3aa160;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #3aa160;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome back!</h2>
+        <form action="/login" method="POST" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="email">Email address:</label><br>
+                <input type="email" id="email" name="email" required><br>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" required><br>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+        <p>Or:</p>
+        <button onclick="loginWithGoogle()" class="btn">Continue with Google</button>
+        <button onclick="loginWithApple()" class="btn">Continue with Apple</button>
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            // Handle login logic here
+            
+            // If login is successful, redirect to chat.html
+            window.location.href = "chat.html";
+        }
+
+        function loginWithGoogle() {
+            // Redirect to Google sign-in page
+            window.location.href = "https://accounts.google.com/";
+        }
+
+        function loginWithApple() {
+            // Redirect to Apple sign-in page
+            window.location.href = "https://appleid.apple.com/";
+        }
+    </script>
+</body>
+</html>
