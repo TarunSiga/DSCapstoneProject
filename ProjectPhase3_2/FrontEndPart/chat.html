@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .profile-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #3aa160;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            padding: 8px;
+            cursor: pointer;
+            z-index: 1; /* Ensure it's above other elements */
+        }
+        .profile-section {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+            margin-bottom: 10px;
+        }
+        .profile-section input[type="text"] {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+        .chat-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+     /* Adjust this value to move the chat container up or down */
+}
+.sidebar {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+     /* Pushes the old chats section to the bottom */
+}
+        .message-container {
+            margin-bottom: 20px;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: calc(100% - 20px);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #3aa160;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #2e7d5e;
+        }
+        #oldChats {
+    display: none; /* Initially hide the old chats */
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Profile button -->
+<div class="profile-btn" id="profileBtn" onclick="toggleProfileSection()">P</div>
+
+        <!-- Profile section -->
+        <div class="profile-section" id="profileSection">
+            <h2>Edit Profile</h2>
+            <input type="text" id="editName" placeholder="Name">
+            <input type="text" id="editDOB" placeholder="Date of Birth" onclick="showDatePicker()">
+            <input type="text" id="editPhone" placeholder="Phone Number">
+            <input type="text" id="editUniversity" placeholder="University">
+            <!-- Add more fields as needed -->
+            <button class="btn" onclick="saveProfile()">Save</button>
+            <button class="btn" onclick="toggleProfileSection()">Cancel</button>
+        </div>
+        
+
+        <div class="sidebar" id="sidebar">
+            <h2>Old Chats</h2>
+            <div class="message-container" id="oldChats">
+                <!-- Old chats will be displayed here -->
+                <div class="message"></div>
+            </div>
+            <button class="toggle-btn" onclick="toggleOldChats()">Toggle Old Chats</button>
+        </div>
+
+        <div class="chat-container">
+            <h1>Welcome to the Chat</h1>
+            <div class="message-container" id="messageContainer">
+                <!-- Messages will be displayed here -->
+            </div>
+            <input type="text" id="messageInput" placeholder="Type your message...">
+            <button onclick="sendMessage()" class="btn">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleOldChats() {
+    var oldChatsContainer = document.getElementById('oldChats');
+    oldChatsContainer.style.display = oldChatsContainer.style.display === 'none' ? 'block' : 'none';
+}
+
+        function sendMessage() {
+            var messageInput = document.getElementById('messageInput');
+            var message = messageInput.value.trim();
+            if (message !== '') {
+                var messageContainer = document.getElementById('messageContainer');
+                var messageElement = document.createElement('div');
+                messageElement.textContent = message;
+                messageElement.classList.add('message', 'question');
+                messageContainer.appendChild(messageElement);
+
+                // Simulate bot response based on the question
+                var botResponse = document.createElement('div');
+                botResponse.textContent = getBotResponse(message);
+                botResponse.classList.add('message', 'answer');
+                messageContainer.appendChild(botResponse);
+
+                // Move the question and answer to the "Old Chats" section
+                var oldChatsContainer = document.getElementById('oldChats');
+                oldChatsContainer.appendChild(messageElement.cloneNode(true));
+                oldChatsContainer.appendChild(botResponse.cloneNode(true));
+
+                // For now, let's clear the input field
+                messageInput.value = '';
+
+                // Scroll to bottom to show the latest message
+                messageContainer.scrollTop = messageContainer.scrollHeight;
+            }
+        }
+        function showDatePicker() {
+    var input = document.getElementById('editDOB');
+    input.type = 'date'; // Change input type to 'date' to activate the date picker
+    input.click(); // Trigger a click event to show the date picker
+}
+
+
+        function getBotResponse(question) {
+            // Simple logic to determine bot response based on question
+            if (question.toLowerCase().includes('how are you')) {
+                return "I'm doing well, thank you!";
+            } else if (question.toLowerCase().includes('weather')) {
+                return "The weather is sunny today.";
+            } else {
+                return "I'm sorry, I don't understand.";
+            }
+        }
+
+        // Toggle profile section visibility
+        function toggleProfileSection() {
+            var profileSection = document.getElementById('profileSection');
+            profileSection.style.display = profileSection.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Save profile details
+        // Save profile details
+function saveProfile() {
+    var name = document.getElementById('editName').value.trim();
+    var profileBtn = document.getElementById('profileBtn');
+    profileBtn.textContent = name.charAt(0).toUpperCase(); // Update button content with the first letter of the name
+    // You can also set a title attribute to display the full name as a tooltip
+    profileBtn.title = name;
+    // You can save the name to localStorage or any other storage mechanism if needed
+    toggleProfileSection(); // Hide profile section after saving
+}
+
+    </script>
+</body>
+</html>
